@@ -3,7 +3,6 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.http import HttpResponse
-from django.contrib.comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic import list_detail
 from django.views.decorators.http import require_POST

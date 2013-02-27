@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.contrib.contenttypes import generic
-from django.contrib.comments.models import Comment
 from django.db.models.signals import post_save
 
 ALLOW_ALL, REQUIRE_LOGIN, DISALLOW_ALL = range(3)
@@ -51,8 +50,6 @@ class Idea(models.Model):
 
     user = models.ForeignKey(User, null=True, related_name='ideas')
     subsite = models.ForeignKey(Subsite, related_name='ideas')
-
-    comments = generic.GenericRelation(Comment, object_id_field='object_pk')
 
     objects = IdeaManager()
 

@@ -67,7 +67,7 @@ Example dynamic content block::
 Styling the Theme
 -----------------
 
-Obviously the styling/design of the static portions of the theme is entirely within the hands of the designer.  
+Obviously the styling/design of the static portions of the theme is entirely within the hands of the designer.
 There are however a few dynamic sections which typically will need some form of styling.
 
 index
@@ -85,13 +85,9 @@ The 'content' block of the index contains two divs: 'div#ideas' and 'div#paginat
 idea
 ....
 
-The content block of the idea page contains two divs: 'div#idea' and 'div#comments'.
+The content block of the idea page contains one div: 'div#idea'.
 
 'div#idea' contains a single pair of 'div.btnVote' and 'div.voteContent' (see `index`_ for description of these elements)
 
-'div#comments' contains an <h3> with the number of comments, then an ordered list where each <li> has the following elements:
 
-* div.commentMeta which contains span.commentMetaAuthor and span.commentMetaDate
-* div.commentContent which contains a <p> with the comment itself
-
-(TODO: comment form)
+(TODO: comments support)
