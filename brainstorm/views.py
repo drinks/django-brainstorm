@@ -8,13 +8,14 @@ from brainstorm.models import Subsite, Idea, Vote
 
 
 def idea_list(request, slug, ordering='-total_upvotes'):
+    subsite = get_object_or_404(Subsite, slug=slug)
     ordering_db = {'most_popular': '-score',
                    'latest': '-submit_date'}[ordering]
     qs = Idea.objects.with_user_vote(request.user).filter(subsite__slug=slug).select_related().order_by(ordering_db)
     if hasattr(qs, '_gatekeeper'):
         qs = qs.approved()
     return list_detail.object_list(request, queryset=qs,
-        extra_context={'ordering': ordering, 'subsite': slug}, paginate_by=qs[0].subsite.ideas_per_page,
+        extra_context={'ordering': ordering, 'subsite': slug}, paginate_by=subsite.ideas_per_page,
         template_object_name='idea')
 
 
