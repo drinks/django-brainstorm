@@ -14,7 +14,7 @@ def idea_list(request, slug, ordering='-total_upvotes'):
     if hasattr(qs, '_gatekeeper'):
         qs = qs.approved()
     return list_detail.object_list(request, queryset=qs,
-        extra_context={'ordering': ordering, 'subsite': slug}, paginate_by=10,
+        extra_context={'ordering': ordering, 'subsite': slug}, paginate_by=qs[0].subsite.ideas_per_page,
         template_object_name='idea')
 
 

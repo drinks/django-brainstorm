@@ -1,0 +1,11 @@
+{% extends subsite.theme %}
+
+{% block content %}
+
+{% for idea in object_list %}
+<div id="idea">
+    {% include "brainstorm/idea_vote.html" %}
+</div>
+{% endfor %}
+
+{% endblock content %}
