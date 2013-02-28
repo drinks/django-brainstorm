@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.contrib.contenttypes import generic
 from django.db.models.signals import post_save
 
 ALLOW_ALL, REQUIRE_LOGIN, DISALLOW_ALL = range(3)
@@ -10,6 +9,7 @@ SUBSITE_POST_STATUS = (
     (REQUIRE_LOGIN, 'Require Login'),
     (DISALLOW_ALL, 'Allow No Posts'),
 )
+
 
 class Subsite(models.Model):
     slug = models.SlugField(max_length=50, primary_key=True)
@@ -35,10 +35,12 @@ class Subsite(models.Model):
         elif self.post_status == REQUIRE_LOGIN:
             return not user.is_anonymous()
 
+
 class IdeaManager(models.Manager):
 
     def with_user_vote(self, user):
-        return self.extra(select={'user_vote':'SELECT value FROM brainstorm_vote WHERE idea_id=brainstorm_idea.id AND user_id=%s'}, select_params=[user.id])
+        return self.extra(select={'user_vote': 'SELECT value FROM brainstorm_vote WHERE idea_id=brainstorm_idea.id AND user_id=%s'}, select_params=[user.id])
+
 
 class Idea(models.Model):
 
@@ -59,6 +61,7 @@ class Idea(models.Model):
     def get_absolute_url(self):
         return reverse('idea_detail', args=[self.subsite_id, self.id])
 
+
 class Vote(models.Model):
     user = models.ForeignKey(User, related_name='idea_votes')
     idea = models.ForeignKey(Idea, related_name='votes')
@@ -70,6 +73,7 @@ class Vote(models.Model):
 
     class Meta:
         unique_together = (('user', 'idea'),)
+
 
 def update_idea_votes(sender, instance, created, **kwargs):
     score = instance.idea.votes.aggregate(score=models.Sum('value'))['score']

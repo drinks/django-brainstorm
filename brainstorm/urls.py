@@ -36,4 +36,3 @@ if BRAINSTORM_USE_SECRETBALLOT:
             {'content_type': ContentType.objects.get_for_model(Idea), 'vote': 0},
               name='unvote'),
     ) + urlpatterns
-

@@ -1,5 +1,6 @@
-from django.contrib.syndication.feeds import Feed, FeedDoesNotExist
+from django.contrib.syndication.views import Feed, FeedDoesNotExist
 from brainstorm.models import Subsite
+
 
 class SubsiteFeed(Feed):
 
