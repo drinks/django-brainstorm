@@ -6,14 +6,9 @@ from brainstorm.feeds import SubsiteFeed
 
 BRAINSTORM_USE_SECRETBALLOT = getattr(settings, 'BRAINSTORM_USE_SECRETBALLOT', False)
 
-feeds = {
-    'latest': SubsiteFeed,
-}
-
 # feeds live at rss/latest/site-name/
 urlpatterns = patterns('',
-    url(r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',
-        {'feed_dict': feeds}),
+    url(r'^rss/latest/$', SubsiteFeed()),
 )
 
 urlpatterns += patterns('brainstorm.views',
